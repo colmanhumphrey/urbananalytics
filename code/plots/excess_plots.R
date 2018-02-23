@@ -22,9 +22,16 @@ library(cowplot)
 
 ##------------------------------------##
 
+## in our analyses, we restrict to blockgroups of at least 400
+
+min_total_blockgroup <- 400
+
+##------------------------------------##
+
 ## first, crime (vio and nonvio) by pop count, density
 
-blockgroup_data %<>% mutate(pop_density = as.numeric(total / area))
+blockgroup_data %<>% mutate(pop_density = as.numeric(total / area)) %>%
+    filter(total >= min_total_blockgroup)
 
 title_size = 19
 b_height = 12.5
